@@ -1,15 +1,15 @@
+{-# LANGUAGE TypeApplications #-}
 
 
-{- |
-Copyright  : Will Thompson, Iñaki García Etxebarria and Jonas Platte
-License    : LGPL-2.1
-Maintainer : Iñaki García Etxebarria (garetxe@gmail.com)
+-- | Copyright  : Will Thompson and Iñaki García Etxebarria
+-- License    : LGPL-2.1
+-- Maintainer : Iñaki García Etxebarria
+-- 
+-- It wraps @arrow::ipc::RecordBatchStreamWriter@.
 
-It wraps @arrow::ipc::RecordBatchStreamWriter@.
--}
-
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 
 module GI.Arrow.Objects.RecordBatchStreamWriter
     ( 
@@ -18,10 +18,25 @@ module GI.Arrow.Objects.RecordBatchStreamWriter
     RecordBatchStreamWriter(..)             ,
     IsRecordBatchStreamWriter               ,
     toRecordBatchStreamWriter               ,
-    noRecordBatchStreamWriter               ,
 
 
  -- * Methods
+-- | 
+-- 
+--  === __Click to display all available methods, including inherited ones__
+-- ==== Methods
+-- [bindProperty]("GI.GObject.Objects.Object#g:method:bindProperty"), [bindPropertyFull]("GI.GObject.Objects.Object#g:method:bindPropertyFull"), [close]("GI.Arrow.Objects.RecordBatchWriter#g:method:close"), [forceFloating]("GI.GObject.Objects.Object#g:method:forceFloating"), [freezeNotify]("GI.GObject.Objects.Object#g:method:freezeNotify"), [getv]("GI.GObject.Objects.Object#g:method:getv"), [isFloating]("GI.GObject.Objects.Object#g:method:isFloating"), [notify]("GI.GObject.Objects.Object#g:method:notify"), [notifyByPspec]("GI.GObject.Objects.Object#g:method:notifyByPspec"), [ref]("GI.GObject.Objects.Object#g:method:ref"), [refSink]("GI.GObject.Objects.Object#g:method:refSink"), [runDispose]("GI.GObject.Objects.Object#g:method:runDispose"), [stealData]("GI.GObject.Objects.Object#g:method:stealData"), [stealQdata]("GI.GObject.Objects.Object#g:method:stealQdata"), [thawNotify]("GI.GObject.Objects.Object#g:method:thawNotify"), [unref]("GI.GObject.Objects.Object#g:method:unref"), [watchClosure]("GI.GObject.Objects.Object#g:method:watchClosure"), [writeRecordBatch]("GI.Arrow.Objects.RecordBatchWriter#g:method:writeRecordBatch"), [writeTable]("GI.Arrow.Objects.RecordBatchWriter#g:method:writeTable").
+-- 
+-- ==== Getters
+-- [getData]("GI.GObject.Objects.Object#g:method:getData"), [getProperty]("GI.GObject.Objects.Object#g:method:getProperty"), [getQdata]("GI.GObject.Objects.Object#g:method:getQdata").
+-- 
+-- ==== Setters
+-- [setData]("GI.GObject.Objects.Object#g:method:setData"), [setDataFull]("GI.GObject.Objects.Object#g:method:setDataFull"), [setProperty]("GI.GObject.Objects.Object#g:method:setProperty").
+
+#if defined(ENABLE_OVERLOADING)
+    ResolveRecordBatchStreamWriterMethod    ,
+#endif
+
 -- ** new #method:new#
 
     recordBatchStreamWriterNew              ,
@@ -37,16 +52,26 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
 import {-# SOURCE #-} qualified GI.Arrow.Objects.OutputStream as Arrow.OutputStream
 import {-# SOURCE #-} qualified GI.Arrow.Objects.RecordBatchWriter as Arrow.RecordBatchWriter
@@ -54,33 +79,45 @@ import {-# SOURCE #-} qualified GI.Arrow.Objects.Schema as Arrow.Schema
 import qualified GI.GObject.Objects.Object as GObject.Object
 
 -- | Memory-managed wrapper type.
-newtype RecordBatchStreamWriter = RecordBatchStreamWriter (ManagedPtr RecordBatchStreamWriter)
-foreign import ccall "garrow_record_batch_stream_writer_get_type"
-    c_garrow_record_batch_stream_writer_get_type :: IO GType
+newtype RecordBatchStreamWriter = RecordBatchStreamWriter (SP.ManagedPtr RecordBatchStreamWriter)
+    deriving (Eq)
 
-instance GObject RecordBatchStreamWriter where
-    gobjectType _ = c_garrow_record_batch_stream_writer_get_type
-    
+instance SP.ManagedPtrNewtype RecordBatchStreamWriter where
+    toManagedPtr (RecordBatchStreamWriter p) = p
+
+foreign import ccall "garrow_record_batch_stream_writer_get_type"
+    c_garrow_record_batch_stream_writer_get_type :: IO B.Types.GType
+
+instance B.Types.TypedObject RecordBatchStreamWriter where
+    glibType = c_garrow_record_batch_stream_writer_get_type
+
+instance B.Types.GObject RecordBatchStreamWriter
 
 -- | Type class for types which can be safely cast to `RecordBatchStreamWriter`, for instance with `toRecordBatchStreamWriter`.
-class GObject o => IsRecordBatchStreamWriter o
-#if MIN_VERSION_base(4,9,0)
-instance {-# OVERLAPPABLE #-} (GObject a, O.UnknownAncestorError RecordBatchStreamWriter a) =>
-    IsRecordBatchStreamWriter a
-#endif
-instance IsRecordBatchStreamWriter RecordBatchStreamWriter
-instance Arrow.RecordBatchWriter.IsRecordBatchWriter RecordBatchStreamWriter
-instance GObject.Object.IsObject RecordBatchStreamWriter
+class (SP.GObject o, O.IsDescendantOf RecordBatchStreamWriter o) => IsRecordBatchStreamWriter o
+instance (SP.GObject o, O.IsDescendantOf RecordBatchStreamWriter o) => IsRecordBatchStreamWriter o
+
+instance O.HasParentTypes RecordBatchStreamWriter
+type instance O.ParentTypes RecordBatchStreamWriter = '[Arrow.RecordBatchWriter.RecordBatchWriter, GObject.Object.Object]
 
 -- | Cast to `RecordBatchStreamWriter`, for types for which this is known to be safe. For general casts, use `Data.GI.Base.ManagedPtr.castTo`.
-toRecordBatchStreamWriter :: (MonadIO m, IsRecordBatchStreamWriter o) => o -> m RecordBatchStreamWriter
-toRecordBatchStreamWriter = liftIO . unsafeCastTo RecordBatchStreamWriter
+toRecordBatchStreamWriter :: (MIO.MonadIO m, IsRecordBatchStreamWriter o) => o -> m RecordBatchStreamWriter
+toRecordBatchStreamWriter = MIO.liftIO . B.ManagedPtr.unsafeCastTo RecordBatchStreamWriter
 
--- | A convenience alias for `Nothing` :: `Maybe` `RecordBatchStreamWriter`.
-noRecordBatchStreamWriter :: Maybe RecordBatchStreamWriter
-noRecordBatchStreamWriter = Nothing
+-- | Convert 'RecordBatchStreamWriter' to and from 'Data.GI.Base.GValue.GValue'. See 'Data.GI.Base.GValue.toGValue' and 'Data.GI.Base.GValue.fromGValue'.
+instance B.GValue.IsGValue (Maybe RecordBatchStreamWriter) where
+    gvalueGType_ = c_garrow_record_batch_stream_writer_get_type
+    gvalueSet_ gv P.Nothing = B.GValue.set_object gv (FP.nullPtr :: FP.Ptr RecordBatchStreamWriter)
+    gvalueSet_ gv (P.Just obj) = B.ManagedPtr.withManagedPtr obj (B.GValue.set_object gv)
+    gvalueGet_ gv = do
+        ptr <- B.GValue.get_object gv :: IO (FP.Ptr RecordBatchStreamWriter)
+        if ptr /= FP.nullPtr
+        then P.Just <$> B.ManagedPtr.newObject RecordBatchStreamWriter ptr
+        else return P.Nothing
+        
+    
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 type family ResolveRecordBatchStreamWriterMethod (t :: Symbol) (o :: *) :: * where
     ResolveRecordBatchStreamWriterMethod "bindProperty" o = GObject.Object.ObjectBindPropertyMethodInfo
     ResolveRecordBatchStreamWriterMethod "bindPropertyFull" o = GObject.Object.ObjectBindPropertyFullMethodInfo
@@ -105,33 +142,42 @@ type family ResolveRecordBatchStreamWriterMethod (t :: Symbol) (o :: *) :: * whe
     ResolveRecordBatchStreamWriterMethod "getProperty" o = GObject.Object.ObjectGetPropertyMethodInfo
     ResolveRecordBatchStreamWriterMethod "getQdata" o = GObject.Object.ObjectGetQdataMethodInfo
     ResolveRecordBatchStreamWriterMethod "setData" o = GObject.Object.ObjectSetDataMethodInfo
+    ResolveRecordBatchStreamWriterMethod "setDataFull" o = GObject.Object.ObjectSetDataFullMethodInfo
     ResolveRecordBatchStreamWriterMethod "setProperty" o = GObject.Object.ObjectSetPropertyMethodInfo
     ResolveRecordBatchStreamWriterMethod l o = O.MethodResolutionFailed l o
 
-instance (info ~ ResolveRecordBatchStreamWriterMethod t RecordBatchStreamWriter, O.MethodInfo info RecordBatchStreamWriter p) => O.IsLabelProxy t (RecordBatchStreamWriter -> p) where
-    fromLabelProxy _ = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
-
-#if MIN_VERSION_base(4,9,0)
-instance (info ~ ResolveRecordBatchStreamWriterMethod t RecordBatchStreamWriter, O.MethodInfo info RecordBatchStreamWriter p) => O.IsLabel t (RecordBatchStreamWriter -> p) where
+instance (info ~ ResolveRecordBatchStreamWriterMethod t RecordBatchStreamWriter, O.OverloadedMethod info RecordBatchStreamWriter p) => OL.IsLabel t (RecordBatchStreamWriter -> p) where
 #if MIN_VERSION_base(4,10,0)
-    fromLabel = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
+    fromLabel = O.overloadedMethod @info
 #else
-    fromLabel _ = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
+    fromLabel _ = O.overloadedMethod @info
 #endif
+
+#if MIN_VERSION_base(4,13,0)
+instance (info ~ ResolveRecordBatchStreamWriterMethod t RecordBatchStreamWriter, O.OverloadedMethod info RecordBatchStreamWriter p, R.HasField t RecordBatchStreamWriter p) => R.HasField t RecordBatchStreamWriter p where
+    getField = O.overloadedMethod @info
+
+#endif
+
+instance (info ~ ResolveRecordBatchStreamWriterMethod t RecordBatchStreamWriter, O.OverloadedMethodInfo info RecordBatchStreamWriter) => OL.IsLabel t (O.MethodProxy info RecordBatchStreamWriter) where
+#if MIN_VERSION_base(4,10,0)
+    fromLabel = O.MethodProxy
+#else
+    fromLabel _ = O.MethodProxy
 #endif
 
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 instance O.HasAttributeList RecordBatchStreamWriter
 type instance O.AttributeList RecordBatchStreamWriter = RecordBatchStreamWriterAttributeList
 type RecordBatchStreamWriterAttributeList = ('[ '("recordBatchWriter", Arrow.RecordBatchWriter.RecordBatchWriterRecordBatchWriterPropertyInfo)] :: [(Symbol, *)])
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 type instance O.SignalList RecordBatchStreamWriter = RecordBatchStreamWriterSignalList
 type RecordBatchStreamWriterSignalList = ('[ '("notify", GObject.Object.ObjectNotifySignalInfo)] :: [(Symbol, *)])
 
@@ -139,9 +185,45 @@ type RecordBatchStreamWriterSignalList = ('[ '("notify", GObject.Object.ObjectNo
 
 -- method RecordBatchStreamWriter::new
 -- method type : Constructor
--- Args : [Arg {argCName = "sink", argType = TInterface (Name {namespace = "Arrow", name = "OutputStream"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "The output of the writer.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing},Arg {argCName = "schema", argType = TInterface (Name {namespace = "Arrow", name = "Schema"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "The schema of the writer.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing}]
--- Lengths : []
--- returnType : Just (TInterface (Name {namespace = "Arrow", name = "RecordBatchStreamWriter"}))
+-- Args: [ Arg
+--           { argCName = "sink"
+--           , argType =
+--               TInterface Name { namespace = "Arrow" , name = "OutputStream" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "The output of the writer."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       , Arg
+--           { argCName = "schema"
+--           , argType =
+--               TInterface Name { namespace = "Arrow" , name = "Schema" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "The schema of the writer."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       ]
+-- Lengths: []
+-- returnType: Just
+--               (TInterface
+--                  Name { namespace = "Arrow" , name = "RecordBatchStreamWriter" })
 -- throws : True
 -- Skip return : False
 
@@ -151,20 +233,18 @@ foreign import ccall "garrow_record_batch_stream_writer_new" garrow_record_batch
     Ptr (Ptr GError) ->                     -- error
     IO (Ptr RecordBatchStreamWriter)
 
-{- |
-/No description available in the introspection data./
-
-@since 0.4.0
--}
+-- | /No description available in the introspection data./
+-- 
+-- /Since: 0.4.0/
 recordBatchStreamWriterNew ::
     (B.CallStack.HasCallStack, MonadIO m, Arrow.OutputStream.IsOutputStream a, Arrow.Schema.IsSchema b) =>
     a
-    {- ^ /@sink@/: The output of the writer. -}
+    -- ^ /@sink@/: The output of the writer.
     -> b
-    {- ^ /@schema@/: The schema of the writer. -}
+    -- ^ /@schema@/: The schema of the writer.
     -> m (Maybe RecordBatchStreamWriter)
-    {- ^ __Returns:__ A newly created 'GI.Arrow.Objects.RecordBatchStreamWriter.RecordBatchStreamWriter'
-  or 'Nothing' on error. /(Can throw 'Data.GI.Base.GError.GError')/ -}
+    -- ^ __Returns:__ A newly created t'GI.Arrow.Objects.RecordBatchStreamWriter.RecordBatchStreamWriter'
+    --   or 'P.Nothing' on error. /(Can throw 'Data.GI.Base.GError.GError')/
 recordBatchStreamWriterNew sink schema = liftIO $ do
     sink' <- unsafeManagedPtrCastPtr sink
     schema' <- unsafeManagedPtrCastPtr schema
@@ -180,7 +260,7 @@ recordBatchStreamWriterNew sink schema = liftIO $ do
         return ()
      )
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 #endif
 
 

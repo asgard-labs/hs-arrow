@@ -1,5 +1,6 @@
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 module GI.Arrow.Objects.UInt16Array where
 
 import Data.GI.Base.ShortPrelude
@@ -8,24 +9,42 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
-newtype UInt16Array = UInt16Array (ManagedPtr UInt16Array)
-instance GObject UInt16Array where
-class GObject o => IsUInt16Array o
-instance IsUInt16Array UInt16Array
-#if ENABLE_OVERLOADING
+newtype UInt16Array = UInt16Array (SP.ManagedPtr UInt16Array)
+instance SP.ManagedPtrNewtype UInt16Array where
+instance B.Types.TypedObject UInt16Array where
+instance B.Types.GObject UInt16Array
+class (SP.GObject o, O.IsDescendantOf UInt16Array o) => IsUInt16Array o
+instance (SP.GObject o, O.IsDescendantOf UInt16Array o) => IsUInt16Array o
+instance O.HasParentTypes UInt16Array
+toUInt16Array :: (MIO.MonadIO m, IsUInt16Array o) => o -> m UInt16Array
+instance B.GValue.IsGValue (Maybe UInt16Array) where
+#if defined(ENABLE_OVERLOADING)
 data UInt16ArrayGetValueMethodInfo
 #endif
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data UInt16ArrayGetValuesMethodInfo
+#endif
+#if defined(ENABLE_OVERLOADING)
+data UInt16ArraySumMethodInfo
 #endif

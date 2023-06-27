@@ -1,5 +1,6 @@
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 module GI.Arrow.Objects.Int64ArrayBuilder where
 
 import Data.GI.Base.ShortPrelude
@@ -8,30 +9,42 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
-newtype Int64ArrayBuilder = Int64ArrayBuilder (ManagedPtr Int64ArrayBuilder)
-instance GObject Int64ArrayBuilder where
-class GObject o => IsInt64ArrayBuilder o
-instance IsInt64ArrayBuilder Int64ArrayBuilder
-#if ENABLE_OVERLOADING
+newtype Int64ArrayBuilder = Int64ArrayBuilder (SP.ManagedPtr Int64ArrayBuilder)
+instance SP.ManagedPtrNewtype Int64ArrayBuilder where
+instance B.Types.TypedObject Int64ArrayBuilder where
+instance B.Types.GObject Int64ArrayBuilder
+class (SP.GObject o, O.IsDescendantOf Int64ArrayBuilder o) => IsInt64ArrayBuilder o
+instance (SP.GObject o, O.IsDescendantOf Int64ArrayBuilder o) => IsInt64ArrayBuilder o
+instance O.HasParentTypes Int64ArrayBuilder
+toInt64ArrayBuilder :: (MIO.MonadIO m, IsInt64ArrayBuilder o) => o -> m Int64ArrayBuilder
+instance B.GValue.IsGValue (Maybe Int64ArrayBuilder) where
+#if defined(ENABLE_OVERLOADING)
 data Int64ArrayBuilderAppendMethodInfo
 #endif
-#if ENABLE_OVERLOADING
-data Int64ArrayBuilderAppendNullMethodInfo
+#if defined(ENABLE_OVERLOADING)
+data Int64ArrayBuilderAppendValueMethodInfo
 #endif
-#if ENABLE_OVERLOADING
-data Int64ArrayBuilderAppendNullsMethodInfo
-#endif
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data Int64ArrayBuilderAppendValuesMethodInfo
 #endif

@@ -1,14 +1,13 @@
 {-# LANGUAGE PatternSynonyms, ScopedTypeVariables, ViewPatterns #-}
 
 
-{- |
-Copyright  : Will Thompson, Iñaki García Etxebarria and Jonas Platte
-License    : LGPL-2.1
-Maintainer : Iñaki García Etxebarria (garetxe@gmail.com)
--}
+-- | Copyright  : Will Thompson and Iñaki García Etxebarria
+-- License    : LGPL-2.1
+-- Maintainer : Iñaki García Etxebarria
 
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 
 module GI.Arrow.Constants
     ( 
@@ -25,45 +24,47 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
 
-{- |
-The version tag. Normally, it\'s an empty string. It\'s \"SNAPSHOT\"
-for snapshot version.
+-- | The version tag. Normally, it\'s an empty string. It\'s \"SNAPSHOT\"
+-- for snapshot version.
+-- 
+-- /Since: 0.10.0/
+pattern VERSION_TAG = "" :: T.Text
 
-@since 0.10.0
--}
-pattern VERSION_TAG = "SNAPSHOT" :: T.Text
+-- | The minor version.
+-- 
+-- /Since: 0.10.0/
+pattern VERSION_MINOR = 0 :: Int32
 
-{- |
-The minor version.
-
-@since 0.10.0
--}
-pattern VERSION_MINOR = 10 :: Int32
-
-{- |
-The micro version.
-
-@since 0.10.0
--}
+-- | The micro version.
+-- 
+-- /Since: 0.10.0/
 pattern VERSION_MICRO = 0 :: Int32
 
-{- |
-The major version.
-
-@since 0.10.0
--}
-pattern VERSION_MAJOR = 0 :: Int32
+-- | The major version.
+-- 
+-- /Since: 0.10.0/
+pattern VERSION_MAJOR = 9 :: Int32
 
 

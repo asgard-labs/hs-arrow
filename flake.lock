@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "haskell-gi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687112593,
+        "narHash": "sha256-Chko5aTV1+SNKm04fzvmwT0SkBD408l+r9lQQdT3LXg=",
+        "owner": "haskell-gi",
+        "repo": "haskell-gi",
+        "rev": "f950d16f5a7a1a7edf9d0a809ca14d158191f832",
+        "type": "github"
+      },
+      "original": {
+        "owner": "haskell-gi",
+        "repo": "haskell-gi",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1687376262,
@@ -18,6 +34,7 @@
     },
     "root": {
       "inputs": {
+        "haskell-gi": "haskell-gi",
         "nixpkgs": "nixpkgs"
       }
     }

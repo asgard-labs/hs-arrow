@@ -1,5 +1,6 @@
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 module GI.Arrow.Interfaces.File where
 
 import Data.GI.Base.ShortPrelude
@@ -8,27 +9,45 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
-newtype File = File (ManagedPtr File)
-instance GObject File where
-class GObject o => IsFile o
-instance IsFile File
-#if ENABLE_OVERLOADING
+newtype File = File (SP.ManagedPtr File)
+instance SP.ManagedPtrNewtype File where
+instance B.Types.TypedObject File where
+instance B.Types.GObject File
+class (SP.GObject o, O.IsDescendantOf File o) => IsFile o
+instance (SP.GObject o, O.IsDescendantOf File o) => IsFile o
+instance O.HasParentTypes File
+toFile :: (MIO.MonadIO m, IsFile o) => o -> m File
+instance B.GValue.IsGValue (Maybe File) where
+#if defined(ENABLE_OVERLOADING)
 data FileCloseMethodInfo
 #endif
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data FileGetModeMethodInfo
 #endif
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
+data FileIsClosedMethodInfo
+#endif
+#if defined(ENABLE_OVERLOADING)
 data FileTellMethodInfo
 #endif

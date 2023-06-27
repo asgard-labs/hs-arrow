@@ -1,5 +1,6 @@
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 module GI.Arrow.Objects.StringArrayBuilder where
 
 import Data.GI.Base.ShortPrelude
@@ -8,24 +9,45 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
-newtype StringArrayBuilder = StringArrayBuilder (ManagedPtr StringArrayBuilder)
-instance GObject StringArrayBuilder where
-class GObject o => IsStringArrayBuilder o
-instance IsStringArrayBuilder StringArrayBuilder
-#if ENABLE_OVERLOADING
+newtype StringArrayBuilder = StringArrayBuilder (SP.ManagedPtr StringArrayBuilder)
+instance SP.ManagedPtrNewtype StringArrayBuilder where
+instance B.Types.TypedObject StringArrayBuilder where
+instance B.Types.GObject StringArrayBuilder
+class (SP.GObject o, O.IsDescendantOf StringArrayBuilder o) => IsStringArrayBuilder o
+instance (SP.GObject o, O.IsDescendantOf StringArrayBuilder o) => IsStringArrayBuilder o
+instance O.HasParentTypes StringArrayBuilder
+toStringArrayBuilder :: (MIO.MonadIO m, IsStringArrayBuilder o) => o -> m StringArrayBuilder
+instance B.GValue.IsGValue (Maybe StringArrayBuilder) where
+#if defined(ENABLE_OVERLOADING)
 data StringArrayBuilderAppendMethodInfo
 #endif
-#if ENABLE_OVERLOADING
-data StringArrayBuilderAppendValuesMethodInfo
+#if defined(ENABLE_OVERLOADING)
+data StringArrayBuilderAppendStringMethodInfo
+#endif
+#if defined(ENABLE_OVERLOADING)
+data StringArrayBuilderAppendStringLenMethodInfo
+#endif
+#if defined(ENABLE_OVERLOADING)
+data StringArrayBuilderAppendStringsMethodInfo
 #endif

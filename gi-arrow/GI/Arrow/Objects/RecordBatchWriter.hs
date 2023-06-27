@@ -1,15 +1,15 @@
+{-# LANGUAGE TypeApplications #-}
 
 
-{- |
-Copyright  : Will Thompson, Iñaki García Etxebarria and Jonas Platte
-License    : LGPL-2.1
-Maintainer : Iñaki García Etxebarria (garetxe@gmail.com)
+-- | Copyright  : Will Thompson and Iñaki García Etxebarria
+-- License    : LGPL-2.1
+-- Maintainer : Iñaki García Etxebarria
+-- 
+-- It wraps @arrow::ipc::RecordBatchWriter@.
 
-It wraps @arrow::ipc::RecordBatchWriter@.
--}
-
-#define ENABLE_OVERLOADING (MIN_VERSION_haskell_gi_overloading(1,0,0) \
-       && !defined(__HADDOCK_VERSION__))
+#if (MIN_VERSION_haskell_gi_overloading(1,0,0) && !defined(__HADDOCK_VERSION__))
+#define ENABLE_OVERLOADING
+#endif
 
 module GI.Arrow.Objects.RecordBatchWriter
     ( 
@@ -18,13 +18,28 @@ module GI.Arrow.Objects.RecordBatchWriter
     RecordBatchWriter(..)                   ,
     IsRecordBatchWriter                     ,
     toRecordBatchWriter                     ,
-    noRecordBatchWriter                     ,
 
 
  -- * Methods
+-- | 
+-- 
+--  === __Click to display all available methods, including inherited ones__
+-- ==== Methods
+-- [bindProperty]("GI.GObject.Objects.Object#g:method:bindProperty"), [bindPropertyFull]("GI.GObject.Objects.Object#g:method:bindPropertyFull"), [close]("GI.Arrow.Objects.RecordBatchWriter#g:method:close"), [forceFloating]("GI.GObject.Objects.Object#g:method:forceFloating"), [freezeNotify]("GI.GObject.Objects.Object#g:method:freezeNotify"), [getv]("GI.GObject.Objects.Object#g:method:getv"), [isFloating]("GI.GObject.Objects.Object#g:method:isFloating"), [notify]("GI.GObject.Objects.Object#g:method:notify"), [notifyByPspec]("GI.GObject.Objects.Object#g:method:notifyByPspec"), [ref]("GI.GObject.Objects.Object#g:method:ref"), [refSink]("GI.GObject.Objects.Object#g:method:refSink"), [runDispose]("GI.GObject.Objects.Object#g:method:runDispose"), [stealData]("GI.GObject.Objects.Object#g:method:stealData"), [stealQdata]("GI.GObject.Objects.Object#g:method:stealQdata"), [thawNotify]("GI.GObject.Objects.Object#g:method:thawNotify"), [unref]("GI.GObject.Objects.Object#g:method:unref"), [watchClosure]("GI.GObject.Objects.Object#g:method:watchClosure"), [writeRecordBatch]("GI.Arrow.Objects.RecordBatchWriter#g:method:writeRecordBatch"), [writeTable]("GI.Arrow.Objects.RecordBatchWriter#g:method:writeTable").
+-- 
+-- ==== Getters
+-- [getData]("GI.GObject.Objects.Object#g:method:getData"), [getProperty]("GI.GObject.Objects.Object#g:method:getProperty"), [getQdata]("GI.GObject.Objects.Object#g:method:getQdata").
+-- 
+-- ==== Setters
+-- [setData]("GI.GObject.Objects.Object#g:method:setData"), [setDataFull]("GI.GObject.Objects.Object#g:method:setDataFull"), [setProperty]("GI.GObject.Objects.Object#g:method:setProperty").
+
+#if defined(ENABLE_OVERLOADING)
+    ResolveRecordBatchWriterMethod          ,
+#endif
+
 -- ** close #method:close#
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
     RecordBatchWriterCloseMethodInfo        ,
 #endif
     recordBatchWriterClose                  ,
@@ -32,7 +47,7 @@ module GI.Arrow.Objects.RecordBatchWriter
 
 -- ** writeRecordBatch #method:writeRecordBatch#
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
     RecordBatchWriterWriteRecordBatchMethodInfo,
 #endif
     recordBatchWriterWriteRecordBatch       ,
@@ -40,7 +55,7 @@ module GI.Arrow.Objects.RecordBatchWriter
 
 -- ** writeTable #method:writeTable#
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
     RecordBatchWriterWriteTableMethodInfo   ,
 #endif
     recordBatchWriterWriteTable             ,
@@ -49,14 +64,16 @@ module GI.Arrow.Objects.RecordBatchWriter
 
 
  -- * Properties
+
+
 -- ** recordBatchWriter #attr:recordBatchWriter#
-{- | /No description available in the introspection data./
--}
-#if ENABLE_OVERLOADING
+-- | /No description available in the introspection data./
+
+#if defined(ENABLE_OVERLOADING)
     RecordBatchWriterRecordBatchWriterPropertyInfo,
 #endif
     constructRecordBatchWriterRecordBatchWriter,
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
     recordBatchWriterRecordBatchWriter      ,
 #endif
 
@@ -71,48 +88,71 @@ import qualified Data.GI.Base.Overloading as O
 import qualified Prelude as P
 
 import qualified Data.GI.Base.Attributes as GI.Attributes
+import qualified Data.GI.Base.BasicTypes as B.Types
 import qualified Data.GI.Base.ManagedPtr as B.ManagedPtr
+import qualified Data.GI.Base.GArray as B.GArray
+import qualified Data.GI.Base.GClosure as B.GClosure
 import qualified Data.GI.Base.GError as B.GError
+import qualified Data.GI.Base.GHashTable as B.GHT
 import qualified Data.GI.Base.GVariant as B.GVariant
 import qualified Data.GI.Base.GValue as B.GValue
 import qualified Data.GI.Base.GParamSpec as B.GParamSpec
 import qualified Data.GI.Base.CallStack as B.CallStack
+import qualified Data.GI.Base.Properties as B.Properties
+import qualified Data.GI.Base.Signals as B.Signals
+import qualified Control.Monad.IO.Class as MIO
+import qualified Data.Coerce as Coerce
 import qualified Data.Text as T
 import qualified Data.ByteString.Char8 as B
 import qualified Data.Map as Map
 import qualified Foreign.Ptr as FP
+import qualified GHC.OverloadedLabels as OL
+import qualified GHC.Records as R
 
 import {-# SOURCE #-} qualified GI.Arrow.Objects.RecordBatch as Arrow.RecordBatch
 import {-# SOURCE #-} qualified GI.Arrow.Objects.Table as Arrow.Table
 import qualified GI.GObject.Objects.Object as GObject.Object
 
 -- | Memory-managed wrapper type.
-newtype RecordBatchWriter = RecordBatchWriter (ManagedPtr RecordBatchWriter)
-foreign import ccall "garrow_record_batch_writer_get_type"
-    c_garrow_record_batch_writer_get_type :: IO GType
+newtype RecordBatchWriter = RecordBatchWriter (SP.ManagedPtr RecordBatchWriter)
+    deriving (Eq)
 
-instance GObject RecordBatchWriter where
-    gobjectType _ = c_garrow_record_batch_writer_get_type
-    
+instance SP.ManagedPtrNewtype RecordBatchWriter where
+    toManagedPtr (RecordBatchWriter p) = p
+
+foreign import ccall "garrow_record_batch_writer_get_type"
+    c_garrow_record_batch_writer_get_type :: IO B.Types.GType
+
+instance B.Types.TypedObject RecordBatchWriter where
+    glibType = c_garrow_record_batch_writer_get_type
+
+instance B.Types.GObject RecordBatchWriter
 
 -- | Type class for types which can be safely cast to `RecordBatchWriter`, for instance with `toRecordBatchWriter`.
-class GObject o => IsRecordBatchWriter o
-#if MIN_VERSION_base(4,9,0)
-instance {-# OVERLAPPABLE #-} (GObject a, O.UnknownAncestorError RecordBatchWriter a) =>
-    IsRecordBatchWriter a
-#endif
-instance IsRecordBatchWriter RecordBatchWriter
-instance GObject.Object.IsObject RecordBatchWriter
+class (SP.GObject o, O.IsDescendantOf RecordBatchWriter o) => IsRecordBatchWriter o
+instance (SP.GObject o, O.IsDescendantOf RecordBatchWriter o) => IsRecordBatchWriter o
+
+instance O.HasParentTypes RecordBatchWriter
+type instance O.ParentTypes RecordBatchWriter = '[GObject.Object.Object]
 
 -- | Cast to `RecordBatchWriter`, for types for which this is known to be safe. For general casts, use `Data.GI.Base.ManagedPtr.castTo`.
-toRecordBatchWriter :: (MonadIO m, IsRecordBatchWriter o) => o -> m RecordBatchWriter
-toRecordBatchWriter = liftIO . unsafeCastTo RecordBatchWriter
+toRecordBatchWriter :: (MIO.MonadIO m, IsRecordBatchWriter o) => o -> m RecordBatchWriter
+toRecordBatchWriter = MIO.liftIO . B.ManagedPtr.unsafeCastTo RecordBatchWriter
 
--- | A convenience alias for `Nothing` :: `Maybe` `RecordBatchWriter`.
-noRecordBatchWriter :: Maybe RecordBatchWriter
-noRecordBatchWriter = Nothing
+-- | Convert 'RecordBatchWriter' to and from 'Data.GI.Base.GValue.GValue'. See 'Data.GI.Base.GValue.toGValue' and 'Data.GI.Base.GValue.fromGValue'.
+instance B.GValue.IsGValue (Maybe RecordBatchWriter) where
+    gvalueGType_ = c_garrow_record_batch_writer_get_type
+    gvalueSet_ gv P.Nothing = B.GValue.set_object gv (FP.nullPtr :: FP.Ptr RecordBatchWriter)
+    gvalueSet_ gv (P.Just obj) = B.ManagedPtr.withManagedPtr obj (B.GValue.set_object gv)
+    gvalueGet_ gv = do
+        ptr <- B.GValue.get_object gv :: IO (FP.Ptr RecordBatchWriter)
+        if ptr /= FP.nullPtr
+        then P.Just <$> B.ManagedPtr.newObject RecordBatchWriter ptr
+        else return P.Nothing
+        
+    
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 type family ResolveRecordBatchWriterMethod (t :: Symbol) (o :: *) :: * where
     ResolveRecordBatchWriterMethod "bindProperty" o = GObject.Object.ObjectBindPropertyMethodInfo
     ResolveRecordBatchWriterMethod "bindPropertyFull" o = GObject.Object.ObjectBindPropertyFullMethodInfo
@@ -137,19 +177,28 @@ type family ResolveRecordBatchWriterMethod (t :: Symbol) (o :: *) :: * where
     ResolveRecordBatchWriterMethod "getProperty" o = GObject.Object.ObjectGetPropertyMethodInfo
     ResolveRecordBatchWriterMethod "getQdata" o = GObject.Object.ObjectGetQdataMethodInfo
     ResolveRecordBatchWriterMethod "setData" o = GObject.Object.ObjectSetDataMethodInfo
+    ResolveRecordBatchWriterMethod "setDataFull" o = GObject.Object.ObjectSetDataFullMethodInfo
     ResolveRecordBatchWriterMethod "setProperty" o = GObject.Object.ObjectSetPropertyMethodInfo
     ResolveRecordBatchWriterMethod l o = O.MethodResolutionFailed l o
 
-instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.MethodInfo info RecordBatchWriter p) => O.IsLabelProxy t (RecordBatchWriter -> p) where
-    fromLabelProxy _ = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
-
-#if MIN_VERSION_base(4,9,0)
-instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.MethodInfo info RecordBatchWriter p) => O.IsLabel t (RecordBatchWriter -> p) where
+instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.OverloadedMethod info RecordBatchWriter p) => OL.IsLabel t (RecordBatchWriter -> p) where
 #if MIN_VERSION_base(4,10,0)
-    fromLabel = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
+    fromLabel = O.overloadedMethod @info
 #else
-    fromLabel _ = O.overloadedMethod (O.MethodProxy :: O.MethodProxy info)
+    fromLabel _ = O.overloadedMethod @info
 #endif
+
+#if MIN_VERSION_base(4,13,0)
+instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.OverloadedMethod info RecordBatchWriter p, R.HasField t RecordBatchWriter p) => R.HasField t RecordBatchWriter p where
+    getField = O.overloadedMethod @info
+
+#endif
+
+instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.OverloadedMethodInfo info RecordBatchWriter) => OL.IsLabel t (O.MethodProxy info RecordBatchWriter) where
+#if MIN_VERSION_base(4,10,0)
+    fromLabel = O.MethodProxy
+#else
+    fromLabel _ = O.MethodProxy
 #endif
 
 #endif
@@ -159,40 +208,47 @@ instance (info ~ ResolveRecordBatchWriterMethod t RecordBatchWriter, O.MethodInf
    -- Flags: [PropertyWritable,PropertyConstructOnly]
    -- Nullable: (Nothing,Nothing)
 
-{- |
-Construct a `GValueConstruct` with valid value for the “@record-batch-writer@” property. This is rarely needed directly, but it is used by `Data.GI.Base.Constructible.new`.
--}
-constructRecordBatchWriterRecordBatchWriter :: (IsRecordBatchWriter o) => Ptr () -> IO (GValueConstruct o)
-constructRecordBatchWriterRecordBatchWriter val = constructObjectPropertyPtr "record-batch-writer" val
+-- | Construct a `GValueConstruct` with valid value for the “@record-batch-writer@” property. This is rarely needed directly, but it is used by `Data.GI.Base.Constructible.new`.
+constructRecordBatchWriterRecordBatchWriter :: (IsRecordBatchWriter o, MIO.MonadIO m) => Ptr () -> m (GValueConstruct o)
+constructRecordBatchWriterRecordBatchWriter val = MIO.liftIO $ do
+    MIO.liftIO $ B.Properties.constructObjectPropertyPtr "record-batch-writer" val
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data RecordBatchWriterRecordBatchWriterPropertyInfo
 instance AttrInfo RecordBatchWriterRecordBatchWriterPropertyInfo where
     type AttrAllowedOps RecordBatchWriterRecordBatchWriterPropertyInfo = '[ 'AttrConstruct]
-    type AttrSetTypeConstraint RecordBatchWriterRecordBatchWriterPropertyInfo = (~) (Ptr ())
     type AttrBaseTypeConstraint RecordBatchWriterRecordBatchWriterPropertyInfo = IsRecordBatchWriter
+    type AttrSetTypeConstraint RecordBatchWriterRecordBatchWriterPropertyInfo = (~) (Ptr ())
+    type AttrTransferTypeConstraint RecordBatchWriterRecordBatchWriterPropertyInfo = (~) (Ptr ())
+    type AttrTransferType RecordBatchWriterRecordBatchWriterPropertyInfo = Ptr ()
     type AttrGetType RecordBatchWriterRecordBatchWriterPropertyInfo = ()
     type AttrLabel RecordBatchWriterRecordBatchWriterPropertyInfo = "record-batch-writer"
     type AttrOrigin RecordBatchWriterRecordBatchWriterPropertyInfo = RecordBatchWriter
-    attrGet _ = undefined
-    attrSet _ = undefined
-    attrConstruct _ = constructRecordBatchWriterRecordBatchWriter
-    attrClear _ = undefined
+    attrGet = undefined
+    attrSet = undefined
+    attrTransfer _ v = do
+        return v
+    attrConstruct = constructRecordBatchWriterRecordBatchWriter
+    attrClear = undefined
+    dbgAttrInfo = P.Just (O.ResolvedSymbolInfo {
+        O.resolvedSymbolName = "GI.Arrow.Objects.RecordBatchWriter.recordBatchWriter"
+        , O.resolvedSymbolURL = "https://hackage.haskell.org/package/gi-arrow-9.0/docs/GI-Arrow-Objects-RecordBatchWriter.html#g:attr:recordBatchWriter"
+        })
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 instance O.HasAttributeList RecordBatchWriter
 type instance O.AttributeList RecordBatchWriter = RecordBatchWriterAttributeList
 type RecordBatchWriterAttributeList = ('[ '("recordBatchWriter", RecordBatchWriterRecordBatchWriterPropertyInfo)] :: [(Symbol, *)])
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 recordBatchWriterRecordBatchWriter :: AttrLabelProxy "recordBatchWriter"
 recordBatchWriterRecordBatchWriter = AttrLabelProxy
 
 #endif
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 type instance O.SignalList RecordBatchWriter = RecordBatchWriterSignalList
 type RecordBatchWriterSignalList = ('[ '("notify", GObject.Object.ObjectNotifySignalInfo)] :: [(Symbol, *)])
 
@@ -200,9 +256,27 @@ type RecordBatchWriterSignalList = ('[ '("notify", GObject.Object.ObjectNotifySi
 
 -- method RecordBatchWriter::close
 -- method type : OrdinaryMethod
--- Args : [Arg {argCName = "writer", argType = TInterface (Name {namespace = "Arrow", name = "RecordBatchWriter"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "A #GArrowRecordBatchWriter.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing}]
--- Lengths : []
--- returnType : Just (TBasicType TBoolean)
+-- Args: [ Arg
+--           { argCName = "writer"
+--           , argType =
+--               TInterface
+--                 Name { namespace = "Arrow" , name = "RecordBatchWriter" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "A #GArrowRecordBatchWriter."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       ]
+-- Lengths: []
+-- returnType: Just (TBasicType TBoolean)
 -- throws : True
 -- Skip return : False
 
@@ -211,17 +285,15 @@ foreign import ccall "garrow_record_batch_writer_close" garrow_record_batch_writ
     Ptr (Ptr GError) ->                     -- error
     IO CInt
 
-{- |
-/No description available in the introspection data./
-
-@since 0.4.0
--}
+-- | /No description available in the introspection data./
+-- 
+-- /Since: 0.4.0/
 recordBatchWriterClose ::
     (B.CallStack.HasCallStack, MonadIO m, IsRecordBatchWriter a) =>
     a
-    {- ^ /@writer@/: A 'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'. -}
+    -- ^ /@writer@/: A t'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'.
     -> m ()
-    {- ^ /(Can throw 'Data.GI.Base.GError.GError')/ -}
+    -- ^ /(Can throw 'Data.GI.Base.GError.GError')/
 recordBatchWriterClose writer = liftIO $ do
     writer' <- unsafeManagedPtrCastPtr writer
     onException (do
@@ -232,18 +304,60 @@ recordBatchWriterClose writer = liftIO $ do
         return ()
      )
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data RecordBatchWriterCloseMethodInfo
-instance (signature ~ (m ()), MonadIO m, IsRecordBatchWriter a) => O.MethodInfo RecordBatchWriterCloseMethodInfo a signature where
-    overloadedMethod _ = recordBatchWriterClose
+instance (signature ~ (m ()), MonadIO m, IsRecordBatchWriter a) => O.OverloadedMethod RecordBatchWriterCloseMethodInfo a signature where
+    overloadedMethod = recordBatchWriterClose
+
+instance O.OverloadedMethodInfo RecordBatchWriterCloseMethodInfo a where
+    overloadedMethodInfo = P.Just (O.ResolvedSymbolInfo {
+        O.resolvedSymbolName = "GI.Arrow.Objects.RecordBatchWriter.recordBatchWriterClose",
+        O.resolvedSymbolURL = "https://hackage.haskell.org/package/gi-arrow-9.0/docs/GI-Arrow-Objects-RecordBatchWriter.html#v:recordBatchWriterClose"
+        })
+
 
 #endif
 
 -- method RecordBatchWriter::write_record_batch
 -- method type : OrdinaryMethod
--- Args : [Arg {argCName = "writer", argType = TInterface (Name {namespace = "Arrow", name = "RecordBatchWriter"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "A #GArrowRecordBatchWriter.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing},Arg {argCName = "record_batch", argType = TInterface (Name {namespace = "Arrow", name = "RecordBatch"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "The record batch to be written.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing}]
--- Lengths : []
--- returnType : Just (TBasicType TBoolean)
+-- Args: [ Arg
+--           { argCName = "writer"
+--           , argType =
+--               TInterface
+--                 Name { namespace = "Arrow" , name = "RecordBatchWriter" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "A #GArrowRecordBatchWriter."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       , Arg
+--           { argCName = "record_batch"
+--           , argType =
+--               TInterface Name { namespace = "Arrow" , name = "RecordBatch" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "The record batch to be written."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       ]
+-- Lengths: []
+-- returnType: Just (TBasicType TBoolean)
 -- throws : True
 -- Skip return : False
 
@@ -253,19 +367,17 @@ foreign import ccall "garrow_record_batch_writer_write_record_batch" garrow_reco
     Ptr (Ptr GError) ->                     -- error
     IO CInt
 
-{- |
-/No description available in the introspection data./
-
-@since 0.4.0
--}
+-- | /No description available in the introspection data./
+-- 
+-- /Since: 0.4.0/
 recordBatchWriterWriteRecordBatch ::
     (B.CallStack.HasCallStack, MonadIO m, IsRecordBatchWriter a, Arrow.RecordBatch.IsRecordBatch b) =>
     a
-    {- ^ /@writer@/: A 'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'. -}
+    -- ^ /@writer@/: A t'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'.
     -> b
-    {- ^ /@recordBatch@/: The record batch to be written. -}
+    -- ^ /@recordBatch@/: The record batch to be written.
     -> m ()
-    {- ^ /(Can throw 'Data.GI.Base.GError.GError')/ -}
+    -- ^ /(Can throw 'Data.GI.Base.GError.GError')/
 recordBatchWriterWriteRecordBatch writer recordBatch = liftIO $ do
     writer' <- unsafeManagedPtrCastPtr writer
     recordBatch' <- unsafeManagedPtrCastPtr recordBatch
@@ -278,18 +390,60 @@ recordBatchWriterWriteRecordBatch writer recordBatch = liftIO $ do
         return ()
      )
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data RecordBatchWriterWriteRecordBatchMethodInfo
-instance (signature ~ (b -> m ()), MonadIO m, IsRecordBatchWriter a, Arrow.RecordBatch.IsRecordBatch b) => O.MethodInfo RecordBatchWriterWriteRecordBatchMethodInfo a signature where
-    overloadedMethod _ = recordBatchWriterWriteRecordBatch
+instance (signature ~ (b -> m ()), MonadIO m, IsRecordBatchWriter a, Arrow.RecordBatch.IsRecordBatch b) => O.OverloadedMethod RecordBatchWriterWriteRecordBatchMethodInfo a signature where
+    overloadedMethod = recordBatchWriterWriteRecordBatch
+
+instance O.OverloadedMethodInfo RecordBatchWriterWriteRecordBatchMethodInfo a where
+    overloadedMethodInfo = P.Just (O.ResolvedSymbolInfo {
+        O.resolvedSymbolName = "GI.Arrow.Objects.RecordBatchWriter.recordBatchWriterWriteRecordBatch",
+        O.resolvedSymbolURL = "https://hackage.haskell.org/package/gi-arrow-9.0/docs/GI-Arrow-Objects-RecordBatchWriter.html#v:recordBatchWriterWriteRecordBatch"
+        })
+
 
 #endif
 
 -- method RecordBatchWriter::write_table
 -- method type : OrdinaryMethod
--- Args : [Arg {argCName = "writer", argType = TInterface (Name {namespace = "Arrow", name = "RecordBatchWriter"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "A #GArrowRecordBatchWriter.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing},Arg {argCName = "table", argType = TInterface (Name {namespace = "Arrow", name = "Table"}), direction = DirectionIn, mayBeNull = False, argDoc = Documentation {rawDocText = Just "The table to be written.", sinceVersion = Nothing}, argScope = ScopeTypeInvalid, argClosure = -1, argDestroy = -1, argCallerAllocates = False, transfer = TransferNothing}]
--- Lengths : []
--- returnType : Just (TBasicType TBoolean)
+-- Args: [ Arg
+--           { argCName = "writer"
+--           , argType =
+--               TInterface
+--                 Name { namespace = "Arrow" , name = "RecordBatchWriter" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "A #GArrowRecordBatchWriter."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       , Arg
+--           { argCName = "table"
+--           , argType =
+--               TInterface Name { namespace = "Arrow" , name = "Table" }
+--           , direction = DirectionIn
+--           , mayBeNull = False
+--           , argDoc =
+--               Documentation
+--                 { rawDocText = Just "The table to be written."
+--                 , sinceVersion = Nothing
+--                 }
+--           , argScope = ScopeTypeInvalid
+--           , argClosure = -1
+--           , argDestroy = -1
+--           , argCallerAllocates = False
+--           , transfer = TransferNothing
+--           }
+--       ]
+-- Lengths: []
+-- returnType: Just (TBasicType TBoolean)
 -- throws : True
 -- Skip return : False
 
@@ -299,19 +453,17 @@ foreign import ccall "garrow_record_batch_writer_write_table" garrow_record_batc
     Ptr (Ptr GError) ->                     -- error
     IO CInt
 
-{- |
-/No description available in the introspection data./
-
-@since 0.8.0
--}
+-- | /No description available in the introspection data./
+-- 
+-- /Since: 0.8.0/
 recordBatchWriterWriteTable ::
     (B.CallStack.HasCallStack, MonadIO m, IsRecordBatchWriter a, Arrow.Table.IsTable b) =>
     a
-    {- ^ /@writer@/: A 'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'. -}
+    -- ^ /@writer@/: A t'GI.Arrow.Objects.RecordBatchWriter.RecordBatchWriter'.
     -> b
-    {- ^ /@table@/: The table to be written. -}
+    -- ^ /@table@/: The table to be written.
     -> m ()
-    {- ^ /(Can throw 'Data.GI.Base.GError.GError')/ -}
+    -- ^ /(Can throw 'Data.GI.Base.GError.GError')/
 recordBatchWriterWriteTable writer table = liftIO $ do
     writer' <- unsafeManagedPtrCastPtr writer
     table' <- unsafeManagedPtrCastPtr table
@@ -324,10 +476,17 @@ recordBatchWriterWriteTable writer table = liftIO $ do
         return ()
      )
 
-#if ENABLE_OVERLOADING
+#if defined(ENABLE_OVERLOADING)
 data RecordBatchWriterWriteTableMethodInfo
-instance (signature ~ (b -> m ()), MonadIO m, IsRecordBatchWriter a, Arrow.Table.IsTable b) => O.MethodInfo RecordBatchWriterWriteTableMethodInfo a signature where
-    overloadedMethod _ = recordBatchWriterWriteTable
+instance (signature ~ (b -> m ()), MonadIO m, IsRecordBatchWriter a, Arrow.Table.IsTable b) => O.OverloadedMethod RecordBatchWriterWriteTableMethodInfo a signature where
+    overloadedMethod = recordBatchWriterWriteTable
+
+instance O.OverloadedMethodInfo RecordBatchWriterWriteTableMethodInfo a where
+    overloadedMethodInfo = P.Just (O.ResolvedSymbolInfo {
+        O.resolvedSymbolName = "GI.Arrow.Objects.RecordBatchWriter.recordBatchWriterWriteTable",
+        O.resolvedSymbolURL = "https://hackage.haskell.org/package/gi-arrow-9.0/docs/GI-Arrow-Objects-RecordBatchWriter.html#v:recordBatchWriterWriteTable"
+        })
+
 
 #endif
 
